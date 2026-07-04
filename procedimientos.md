@@ -48,9 +48,28 @@ En el archivo JavaScript del formulario:
 import { insertarContenedorAlerta, mostrarAlerta } from "./funcionesComunes.js";
 ```
 
+### 3. Enlazar el JavaScript como módulo
+
+El archivo JavaScript del formulario debe enlazarse en el HTML con
+`type="module"`, porque utiliza `import` para cargar las funciones comunes:
+
+```html
+<script type="module" src="../../js/perfiles.js"></script>
+```
+
+En `index.html`, la ruta correspondiente es:
+
+```html
+<script type="module" src="js/script.js"></script>
+```
+
+La ruta y el nombre del archivo deben ajustarse a cada formulario. Si se omite
+`type="module"`, el navegador no podrá procesar las instrucciones `import` y el
+script no ejecutará `insertarContenedorAlerta()` ni `mostrarAlerta()`.
+
 ---
 
-### 3. Insertar el contenedor de alertas
+### 4. Insertar el contenedor de alertas
 
 Dentro de `DOMContentLoaded`:
 
@@ -66,7 +85,7 @@ No es necesario agregar código HTML manualmente.
 
 ---
 
-### 4. Reemplazar alert()
+### 5. Reemplazar alert()
 
 #### Antes
 
@@ -299,6 +318,8 @@ insertarContenedorAlerta();
 - No debe agregarse código HTML manual para las alertas.
 
 - La hoja `alertas.css` debe cargarse después de los estilos propios del formulario.
+
+- Todo script que importe `funcionesComunes.js` debe enlazarse con `type="module"`.
 
 - Las alertas desaparecen automáticamente después de unos segundos.
 
