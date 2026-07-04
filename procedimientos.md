@@ -21,7 +21,26 @@ Tipos disponibles:
 
 ## Requisitos
 
-### 1. Importar funciones
+### 1. Cargar los estilos del componente
+
+En el `<head>` del formulario, después de las demás hojas de estilo:
+
+```html
+<link rel="stylesheet" href="../../css/alertas.css" />
+```
+
+En `index.html`, la ruta es:
+
+```html
+<link rel="stylesheet" href="css/alertas.css" />
+```
+
+No se debe cargar `style.css` únicamente para mostrar alertas. Esa hoja contiene
+estilos generales de la aplicación principal que pueden cambiar la apariencia de
+los formularios. `alertas.css` está encapsulada bajo `#alerta-toast` y solo afecta
+al componente de alerta.
+
+### 2. Importar funciones
 
 En el archivo JavaScript del formulario:
 
@@ -31,7 +50,7 @@ import { insertarContenedorAlerta, mostrarAlerta } from "./funcionesComunes.js";
 
 ---
 
-### 2. Insertar el contenedor de alertas
+### 3. Insertar el contenedor de alertas
 
 Dentro de `DOMContentLoaded`:
 
@@ -47,7 +66,7 @@ No es necesario agregar código HTML manualmente.
 
 ---
 
-### 3. Reemplazar alert()
+### 4. Reemplazar alert()
 
 #### Antes
 
@@ -278,6 +297,8 @@ insertarContenedorAlerta();
 ```
 
 - No debe agregarse código HTML manual para las alertas.
+
+- La hoja `alertas.css` debe cargarse después de los estilos propios del formulario.
 
 - Las alertas desaparecen automáticamente después de unos segundos.
 
