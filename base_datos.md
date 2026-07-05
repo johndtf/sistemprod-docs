@@ -4,11 +4,11 @@
 
 Contiene los estados posibles de una llanta.
 
-Ejemplos:
+Valores principales:
 
-1 = Pendiente
-2 = Apta
-3 = Rechazada
+0 = Pendiente
+1 = Apta
+2 = Rechazada
 
 ---
 

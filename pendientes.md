@@ -2,8 +2,13 @@
 
 ## Producción
 
-- Implementar Inspección Inicial.
-- Implementar Raspado.
+Implementados:
+
+- Inspección Inicial.
+- Raspado.
+
+Pendientes:
+
 - Implementar Preparación.
 - Implementar Reparación.
 - Implementar Relleno.

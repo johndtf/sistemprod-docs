@@ -326,3 +326,37 @@ insertarContenedorAlerta();
 - El usuario puede cerrarlas manualmente mediante el botón "×".
 
 - Todas las nuevas pantallas deben utilizar este sistema de alertas desde su creación.
+
+---
+
+# Búsquedas en formularios de producción
+
+## Búsqueda de llantas
+
+Los formularios deben buscar la llanta mediante:
+
+- Un botón visible `Buscar`.
+- La tecla `Enter` cuando el foco está en el campo tiquete.
+
+No se debe ejecutar la búsqueda con el evento `blur`. Perder el foco puede ocurrir
+de forma accidental y producir consultas inesperadas mientras el usuario llena el
+formulario.
+
+Durante la consulta, el botón debe quedar deshabilitado y mostrar un texto de
+progreso. Al finalizar debe recuperar su estado original.
+
+## Selección de operarios
+
+Los subprocesos deben usar un selector buscable de empleados activos. Cada opción
+debe mostrar:
+
+```text
+Código - Nombre Apellido
+```
+
+La búsqueda debe aceptar tanto el código como el nombre. El valor enviado al
+backend siempre será `id_empleado`.
+
+El backend debe volver a validar que el empleado exista y conserve el estado `A`
+antes de registrar el proceso. El selector mejora la captura, pero no reemplaza
+la validación de negocio del servidor.

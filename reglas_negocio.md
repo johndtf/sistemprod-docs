@@ -17,15 +17,58 @@ Resultado posible:
 
 Si la resolución corresponde a:
 
-id_resolucion = 2
+id_resolucion = 1
 
 La llanta queda:
 
 Estado = APTA
 
-Si la resolución corresponde a cualquier código de rechazo:
+Si la resolución corresponde a cualquier código de rechazo distinto de 0 y 1:
 
 Estado = RECHAZADA
+
+---
+
+## Raspado
+
+Solo pueden ingresar a Raspado las llantas que:
+
+- Tengan estado `APTA` (`id_estado = 1`).
+- Tengan una Inspección Inicial aprobada en la tabla `procesos`.
+
+Cada ejecución registra:
+
+- Radio de raspado.
+- Perímetro.
+- Ancho.
+- Retiro de cinturón.
+- Operario activo.
+- Fecha del proceso y fecha de registro.
+
+La tabla `llantas` conserva los últimos valores de raspado. La tabla `procesos`
+conserva una copia de los valores de cada ejecución para mantener la trazabilidad.
+
+Cuando una llanta repite Raspado, no se modifica el registro histórico anterior:
+se crea un nuevo registro con `id_subproceso = 2` y `reproceso = 1`.
+
+### Resultado apto
+
+- La llanta conserva el estado `APTA`.
+- Se registra `id_resolucion = 1` e `id_estado_resultado = 1`.
+
+### Rechazo durante raspado
+
+- Se utilizan los motivos del catálogo `resoluciones_i`, excepto PENDIENTE y APTA.
+- La llanta pasa a estado `RECHAZADA` (`id_estado = 2`).
+- Se registra una nueva fila en `procesos` con `id_subproceso = 2`.
+
+El subproceso registrado permite distinguir este rechazo de una devolución sin
+trabajar, la cual ocurre durante la Inspección Inicial.
+
+### Operarios
+
+Solo los empleados con estado `A` pueden ser seleccionados como operarios de
+Raspado.
 
 ---
 
