@@ -357,6 +357,11 @@ Código - Nombre Apellido
 La búsqueda debe aceptar tanto el código como el nombre. El valor enviado al
 backend siempre será `id_empleado`.
 
+La sección informativa de cada subproceso debe mostrar el operario de la última
+actualización guardada en `llantas`, con formato `Código - Nombre Apellido`. Este
+campo es de solo lectura y no reemplaza el selector del operario que realizará
+la nueva ejecución.
+
 El backend debe volver a validar que el empleado exista y conserve el estado `A`
 antes de registrar el proceso. El selector mejora la captura, pero no reemplaza
 la validación de negocio del servidor.

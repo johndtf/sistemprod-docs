@@ -47,6 +47,20 @@ en `llantas` mediante:
 Estos campos no reemplazan el historial. Cada ejecución, incluidos los
 reprocesos, genera una fila independiente en `procesos`.
 
+### Estado actual de Reparación
+
+La última actualización se conserva en `llantas` mediante:
+
+- `fecha_reparacion`
+- `fecha_registro_reparacion`
+- `id_operario_reparacion`
+- `id_resolucion_reparacion`
+
+El catálogo `reparaciones` contiene `id_reparacion`, `referencia` y `nombre`.
+La tabla `reparaciones_proceso` relaciona cada parche y su cantidad con una fila
+histórica de `procesos`. Su clave compuesta impide repetir una referencia dentro
+de la misma ejecución.
+
 ---
 
 ## Tabla subprocesos

@@ -113,6 +113,41 @@ validar su estado al guardar el proceso.
 
 ---
 
+## Reparación
+
+Reparación es un subproceso opcional. Una llanta que no necesite parches no crea
+un registro de Reparación en `procesos`.
+
+Puede ingresar a Reparación cualquier llanta con estado `APTA`; no es obligatorio
+que tenga Raspado o Preparación. Esto permite que un reproceso requiera solamente
+Inspección Inicial y Reparación.
+
+Una Reparación aprobada debe registrar al menos una referencia y una cantidad
+entera positiva. Una referencia no puede repetirse dentro de la misma ejecución.
+Para cambiarla en el formulario se sustrae y se adiciona nuevamente antes de
+actualizar.
+
+Cada ejecución crea una fila en `procesos` con `id_subproceso = 4`. Sus parches
+se guardan en `reparaciones_proceso` usando el `id_proceso` recién creado. Cuando
+se repite el subproceso, se crea otra fila con `reproceso = 1`.
+
+### Resultado apto
+
+- La llanta conserva el estado `APTA`.
+- Se registra la resolución APTA y los parches utilizados.
+
+### Rechazo durante reparación
+
+- Usa los motivos de `resoluciones_i`, excepto PENDIENTE y APTA.
+- Cambia la llanta a `RECHAZADA`.
+- Puede registrarse sin parches.
+
+La tabla `llantas` conserva únicamente la última fecha, fecha de registro,
+operario y resolución de Reparación. El ingreso exclusivo para reparación se
+definirá posteriormente como un flujo especial.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición
