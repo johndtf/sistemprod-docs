@@ -360,3 +360,18 @@ backend siempre será `id_empleado`.
 El backend debe volver a validar que el empleado exista y conserve el estado `A`
 antes de registrar el proceso. El selector mejora la captura, pero no reemplaza
 la validación de negocio del servidor.
+
+## Menú lateral de subprocesos
+
+Cada elemento del menú debe declarar su identificador mediante
+`data-id-subproceso`. Al buscar una llanta, la API devuelve el arreglo
+`subprocesos` con las etapas que tienen registros en el historial y el módulo
+compartido `menuSubprocesos.js` aplica la clase `completed`.
+
+La clase `current` identifica el formulario abierto y tiene prioridad visual
+sobre `completed`. Cuando una búsqueda falla o se limpia el formulario, deben
+retirarse los indicadores de la llanta anterior sin eliminar `current`.
+
+Los enlaces laterales deben apuntar directamente a los formularios de
+producción. De esta forma el usuario puede cambiar de subproceso sin regresar al
+menú principal de producción.
