@@ -375,3 +375,8 @@ retirarse los indicadores de la llanta anterior sin eliminar `current`.
 Los enlaces laterales deben apuntar directamente a los formularios de
 producción. De esta forma el usuario puede cambiar de subproceso sin regresar al
 menú principal de producción.
+
+La imagen de la llanta y el título `Subprocesos` deben formar un único enlace a
+`menu_produccion.html`. Este enlace permite volver al menú general de producción
+y debe conservar un nombre accesible, por ejemplo
+`aria-label="Volver al menú de producción"`.
