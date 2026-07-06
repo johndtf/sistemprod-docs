@@ -6,10 +6,10 @@ Implementados:
 
 - Inspección Inicial.
 - Raspado.
+- Preparación.
 
 Pendientes:
 
-- Implementar Preparación.
 - Implementar Reparación.
 - Implementar Relleno.
 - Implementar Corte de Banda.

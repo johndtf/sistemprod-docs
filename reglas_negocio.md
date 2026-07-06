@@ -72,6 +72,47 @@ Raspado.
 
 ---
 
+## Preparación
+
+Escariado forma parte de Preparación y no se registra como un subproceso
+independiente.
+
+Solo pueden ingresar a Preparación las llantas que:
+
+- Tengan estado `APTA` (`id_estado = 1`).
+- Tengan un Raspado aprobado en la tabla `procesos`.
+
+Preparación no genera mediciones propias. Cada ejecución registra:
+
+- Operario activo.
+- Fecha del proceso y fecha de registro.
+- Resolución y estado resultante.
+- Observación cuando se rechaza la llanta.
+
+La tabla `llantas` conserva los datos de la última Preparación. La tabla
+`procesos` conserva todas las ejecuciones con `id_subproceso = 3`.
+
+Cuando una llanta repite Preparación, no se modifica el registro anterior: se
+crea uno nuevo con `reproceso = 1`.
+
+### Resultado apto
+
+- La llanta conserva el estado `APTA`.
+- Se registra `id_resolucion = 1` e `id_estado_resultado = 1`.
+
+### Rechazo durante preparación
+
+- Se usan los motivos de `resoluciones_i`, excepto PENDIENTE y APTA.
+- La llanta pasa a estado `RECHAZADA` (`id_estado = 2`).
+- Se agrega una fila en `procesos` con `id_subproceso = 3`.
+
+### Operarios
+
+Solo los empleados con estado `A` pueden seleccionarse. El backend vuelve a
+validar su estado al guardar el proceso.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición

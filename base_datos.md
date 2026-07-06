@@ -34,6 +34,19 @@ Ejemplos:
 2 = Segundo reencauche
 3 = Tercer reencauche
 
+### Estado actual de Preparación
+
+Preparación no produce mediciones propias. La última ejecución queda resumida
+en `llantas` mediante:
+
+- `fecha_preparacion`
+- `fecha_registro_preparacion`
+- `id_operario_preparacion`
+- `id_resolucion_preparacion`
+
+Estos campos no reemplazan el historial. Cada ejecución, incluidos los
+reprocesos, genera una fila independiente en `procesos`.
+
 ---
 
 ## Tabla subprocesos
