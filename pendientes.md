@@ -8,10 +8,10 @@ Implementados:
 - Raspado.
 - Preparación.
 - Reparación.
+- Relleno.
 
 Pendientes:
 
-- Implementar Relleno.
 - Implementar Corte de Banda.
 - Implementar Embandado.
 - Implementar Vulcanización.

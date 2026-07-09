@@ -61,6 +61,25 @@ La tabla `reparaciones_proceso` relaciona cada parche y su cantidad con una fila
 histórica de `procesos`. Su clave compuesta impide repetir una referencia dentro
 de la misma ejecución.
 
+### Estado actual de Relleno
+
+Relleno no produce mediciones propias. La ultima ejecucion queda resumida en
+`llantas` mediante:
+
+- `fecha_relleno`
+- `fecha_registro_relleno`
+- `id_operario_relleno`
+- `id_resolucion_relleno`
+
+Cada ejecucion crea una fila independiente en `procesos` con
+`id_subproceso = 5`.
+
+### Parametros de planta
+
+La tabla `parametros_planta` guarda ajustes operativos configurables por planta.
+El parametro `tiempo_secado_relleno_minutos` define los minutos orientativos de
+secado que se muestran en Relleno.
+
 ---
 
 ## Tabla subprocesos

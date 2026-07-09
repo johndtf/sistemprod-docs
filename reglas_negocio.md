@@ -148,6 +148,44 @@ definirá posteriormente como un flujo especial.
 
 ---
 
+## Relleno
+
+Solo pueden ingresar a Relleno las llantas que:
+
+- Esten en estado `APTA`.
+- Tengan una Preparacion aprobada en `procesos`.
+
+Reparacion es opcional. Para la ayuda de secado, si la llanta tiene Reparacion
+aprobada se calcula la diferencia desde la fecha de Reparacion; si no tiene
+Reparacion, se calcula desde la fecha de Preparacion.
+
+El tiempo minimo de secado no queda fijo en codigo. Se consulta desde
+`parametros_planta`, mediante el parametro
+`tiempo_secado_relleno_minutos`, porque depende de condiciones de cada planta.
+
+El formulario muestra:
+
+- Fecha y hora de Preparacion.
+- Fecha y hora de Reparacion, si existe.
+- Fecha y hora actual.
+- Diferencia en minutos.
+
+La diferencia es una ayuda visual. El boton de registro no se bloquea por esta
+regla.
+
+Cada ejecucion crea una fila en `procesos` con `id_subproceso = 5`. Si se repite
+el subproceso, se crea otra fila con `reproceso = 1`.
+
+### Rechazo durante relleno
+
+- Usa los motivos de `resoluciones_i`, excepto PENDIENTE y APTA.
+- Cambia la llanta a `RECHAZADA`.
+
+La tabla `llantas` conserva unicamente la ultima fecha, fecha de registro,
+operario y resolucion de Relleno.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición
