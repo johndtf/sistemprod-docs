@@ -92,11 +92,28 @@ que se muestran para cortar la banda provienen del ultimo Raspado aprobado:
 Cada banda marcada como cortada crea una fila en `procesos` con
 `id_subproceso = 6`.
 
+### Estado actual de Embandado
+
+Embandado no produce datos propios adicionales. La ultima ejecucion queda
+resumida en `llantas` mediante:
+
+- `fecha_embandado`
+- `fecha_registro_embandado`
+- `id_operario_embandado`
+- `id_resolucion_embandado`
+
+Cada ejecucion crea una fila independiente en `procesos` con
+`id_subproceso = 7`.
+
+Para ingresar a Embandado, la llanta debe conservar estado `APTA`, tener Relleno
+aprobado y tener Corte de Banda registrado despues del ultimo Relleno. Si Corte
+fue deshecho, la llanta no queda disponible para Embandado.
+
 ### Parametros de planta
 
 La tabla `parametros_planta` guarda ajustes operativos configurables por planta.
 El parametro `tiempo_secado_relleno_minutos` define los minutos orientativos de
-secado que se muestran en Relleno.
+secado que se muestran en Relleno y Embandado.
 
 ---
 

@@ -257,6 +257,57 @@ ultimo Corte registrado.
 
 ---
 
+## Embandado
+
+Solo pueden ingresar a Embandado las llantas que:
+
+- Esten en estado `APTA`.
+- Tengan Relleno aprobado en `procesos`.
+- Tengan Corte de Banda registrado despues del ultimo Relleno aprobado.
+
+Si el Corte de Banda fue deshecho, la llanta vuelve a quedar pendiente de Corte
+y no puede ingresar a Embandado.
+
+Embandado no tiene datos tecnicos propios. El formulario muestra informacion
+contextual para verificar la llanta antes de registrar:
+
+- Tiquete.
+- Orden.
+- Cliente.
+- Marca.
+- Dimension.
+- Diseno o banda.
+- Serie.
+- Estado.
+- Nivel de reencauche.
+- Ancho.
+- Largo tomado del perimetro.
+- Fecha y hora del ultimo Corte de Banda.
+- Fecha y hora actual.
+- Diferencia en minutos desde el Corte de Banda.
+- Operario que realizo el Corte de Banda.
+
+El tiempo minimo de secado usa el mismo parametro de planta de Relleno:
+`tiempo_secado_relleno_minutos`.
+
+La diferencia de secado es una ayuda visual. El boton de registro no se bloquea
+por esta regla.
+
+Cada ejecucion aprobada crea una fila en `procesos` con `id_subproceso = 7` y
+mantiene la llanta en estado `APTA`. Si el subproceso se repite, se crea otra
+fila con `reproceso = 1`.
+
+### Rechazo durante embandado
+
+- Usa los motivos de `resoluciones_i`, excepto PENDIENTE y APTA.
+- Cambia la llanta a `RECHAZADA`.
+- Registra una fila en `procesos` con `id_subproceso = 7`.
+
+La tabla `llantas` conserva unicamente la ultima fecha, fecha de registro,
+operario y resolucion de Embandado.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición
