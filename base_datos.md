@@ -74,6 +74,24 @@ Relleno no produce mediciones propias. La ultima ejecucion queda resumida en
 Cada ejecucion crea una fila independiente en `procesos` con
 `id_subproceso = 5`.
 
+### Estado actual de Corte de Banda
+
+Corte de Banda trabaja como operacion por lote. La ultima ejecucion queda
+resumida en `llantas` mediante:
+
+- `fecha_corte`
+- `fecha_registro_corte`
+- `id_operario_corte`
+
+El diseno de banda viene de la orden mediante `id_banda`. El ancho y el largo
+que se muestran para cortar la banda provienen del ultimo Raspado aprobado:
+
+- `ancho`
+- `perimetro`
+
+Cada banda marcada como cortada crea una fila en `procesos` con
+`id_subproceso = 6`.
+
 ### Parametros de planta
 
 La tabla `parametros_planta` guarda ajustes operativos configurables por planta.

@@ -9,10 +9,10 @@ Implementados:
 - Preparación.
 - Reparación.
 - Relleno.
+- Corte de Banda.
 
 Pendientes:
 
-- Implementar Corte de Banda.
 - Implementar Embandado.
 - Implementar Vulcanización.
 - Implementar Inspección Final.

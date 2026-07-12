@@ -186,6 +186,77 @@ operario y resolucion de Relleno.
 
 ---
 
+## Corte de Banda
+
+Corte de Banda es una operacion por lote. No se busca una sola llanta para
+registrar datos propios; el formulario muestra las llantas pendientes de cortar
+su banda.
+
+Una llanta aparece pendiente cuando:
+
+- Esta en estado `APTA`.
+- Tiene un Raspado aprobado en `procesos`.
+- No tiene un Corte aprobado posterior a ese ultimo Raspado.
+
+El formulario muestra:
+
+- Tiquete.
+- Orden.
+- Diseno o banda definido en la orden.
+- Ancho registrado en Raspado.
+- Largo tomado del perimetro registrado en Raspado.
+- Dimension.
+- Fecha/hora de Raspado.
+- Minutos transcurridos desde el registro de Raspado.
+
+Antes de actualizar las bandas, se debe seleccionar:
+
+- Operario activo que realiza el corte.
+- Fecha y hora del corte.
+
+El ordenamiento operativo permite:
+
+- Ordenar por banda/diseno y ancho, para cortar varias bandas iguales.
+- Ordenar por tiempo transcurrido desde Raspado, para priorizar las llantas que
+  llevan mas tiempo esperando corte.
+
+Al marcar las casillas y usar `Actualizar bandas`, cada llanta seleccionada:
+
+- No modifica el estado actual de la llanta.
+- No modifica ni registra una resolucion de la llanta.
+- Registra operario, fecha de corte y fecha de registro.
+- Crea una fila en `procesos` con `id_subproceso = 6`.
+- Actualiza en `llantas` la ultima fecha, fecha de registro y operario de
+  Corte.
+
+Si una llanta repite Corte de Banda, se crea una nueva fila en `procesos` con
+`reproceso = 1`.
+
+### Deshacer corte
+
+Si una banda fue marcada como cortada por error, se puede buscar por tiquete y
+usar `Deshacer corte`.
+
+La operacion elimina el ultimo registro de Corte de Banda y restaura en
+`llantas` el corte anterior si existia. Si no existia, deja los campos de Corte
+en `NULL`.
+
+No se permite deshacer cuando la llanta ya tiene procesos posteriores al Corte,
+porque se romperia la trazabilidad.
+
+### Reproceso de corte
+
+El mismo resultado de busqueda permite registrar un reproceso de Corte. Esta
+accion crea una nueva fila en `procesos` con `reproceso = 1` y actualiza la
+informacion vigente en `llantas`.
+
+El reproceso tambien requiere operario activo y fecha/hora del nuevo corte.
+
+No se permite reprocesar Corte si la llanta ya tiene procesos posteriores al
+ultimo Corte registrado.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición
