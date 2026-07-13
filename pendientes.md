@@ -17,6 +17,9 @@ Implementados:
 
 Pendientes:
 
+- Salidas de llantas reencauchadas y reparadas.
+- Costeo estimado de reencauchadas en salida usando `pesos_banda`.
+- Recosteo mensual de reencauchadas con costo/kg real.
 
 ---
 

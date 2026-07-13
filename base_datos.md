@@ -168,6 +168,19 @@ La tabla `parametros_planta` guarda ajustes operativos configurables por planta.
 El parametro `tiempo_secado_relleno_minutos` define los minutos orientativos de
 secado que se muestran en Relleno y Embandado.
 
+### Catalogo pesos_banda
+
+La tabla `pesos_banda` guarda el peso promedio de banda por combinacion de
+dimension y diseno:
+
+- `id_peso_banda`
+- `id_dimension`
+- `id_banda`
+- `peso_promedio`
+
+La combinacion `id_dimension + id_banda` es unica. Este catalogo se usara para
+estimar el costo de las llantas `REENCAUCHADAS` al momento de la salida.
+
 ---
 
 ## Tabla subprocesos

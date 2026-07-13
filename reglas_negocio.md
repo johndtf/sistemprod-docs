@@ -406,6 +406,30 @@ repite Terminacion, se crea otra fila con `reproceso = 1`.
 
 ---
 
+# Costeo de Reencauchadas
+
+## Peso promedio de banda
+
+El costo de una llanta reencauchada se calculara usando el peso promedio de la
+banda procesada para su combinacion de dimension y diseno.
+
+El catalogo `pesos_banda` debe contener una fila por cada combinacion:
+
+- dimension
+- diseno
+- peso promedio de banda en kg
+
+Cuando se implemente la salida de llantas reencauchadas, el sistema debera
+buscar esta combinacion antes de permitir la salida. Si no existe, debe informar
+al usuario para que calcule el peso promedio, cree el registro en el catalogo y
+repita la salida.
+
+Las llantas reparadas no se costean con este catalogo por ahora. Su costeo se
+definira posteriormente, probablemente con base en tipo y cantidad de
+reparaciones usadas.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición
