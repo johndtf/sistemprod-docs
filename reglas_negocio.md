@@ -377,6 +377,35 @@ una inspeccion final anterior, la llanta vuelve a estado `APTA`.
 
 ---
 
+## Terminacion
+
+Solo pueden ingresar a Terminacion las llantas que:
+
+- Tengan Inspeccion Final aprobada en `procesos`.
+- Esten en estado `REPARADA` o `REENCAUCHADA`.
+
+Terminacion no tiene datos tecnicos propios. Registra:
+
+- Operario activo.
+- Fecha y hora de terminacion.
+- Resolucion y estado resultante.
+
+Un registro aprobado conserva el estado vigente de la llanta:
+
+- Si llega `REPARADA`, queda `REPARADA`.
+- Si llega `REENCAUCHADA`, queda `REENCAUCHADA`.
+
+Cada ejecucion crea una fila en `procesos` con `id_subproceso = 10`. Si se
+repite Terminacion, se crea otra fila con `reproceso = 1`.
+
+### Rechazo durante terminacion
+
+- Usa los motivos de `resoluciones_i`, excepto PENDIENTE y APTA.
+- Cambia la llanta a `RECHAZADA`.
+- Registra una fila en `procesos` con `id_subproceso = 10`.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición

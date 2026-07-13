@@ -13,10 +13,10 @@ Implementados:
 - Embandado.
 - Vulcanización.
 - Inspección Final.
+- Terminación.
 
 Pendientes:
 
-- Implementar Terminación.
 
 ---
 

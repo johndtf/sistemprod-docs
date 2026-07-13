@@ -148,6 +148,20 @@ Cada ejecucion crea una fila independiente en `procesos` con
 fila historica y `llantas` vuelve a reflejar la inspeccion final anterior. Si no
 hay una anterior, la llanta vuelve a estado `APTA`.
 
+### Estado actual de Terminacion
+
+Terminacion cierra el flujo productivo de llantas `REPARADAS` o
+`REENCAUCHADAS`. La ultima ejecucion queda resumida en `llantas` mediante:
+
+- `fecha_terminacion`
+- `fecha_registro_terminacion`
+- `id_operario_terminacion`
+- `id_resolucion_terminacion`
+
+Cada ejecucion crea una fila independiente en `procesos` con
+`id_subproceso = 10`. Un registro aprobado conserva en `llantas.id_estado` el
+estado con el que llega desde Inspeccion Final: `REPARADA` o `REENCAUCHADA`.
+
 ### Parametros de planta
 
 La tabla `parametros_planta` guarda ajustes operativos configurables por planta.
