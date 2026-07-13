@@ -12,10 +12,10 @@ Implementados:
 - Corte de Banda.
 - Embandado.
 - Vulcanización.
+- Inspección Final.
 
 Pendientes:
 
-- Implementar Inspección Final.
 - Implementar Terminación.
 
 ---

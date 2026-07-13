@@ -338,6 +338,45 @@ Si el subproceso se repite, se crea otra fila en `procesos` con
 
 ---
 
+## Inspeccion Final
+
+Solo pueden ingresar a Inspeccion Final las llantas que:
+
+- Tengan Vulcanizado aprobado en `procesos`.
+- Esten en estado `APTA`, `REPARADA` o `REENCAUCHADA`.
+- No tengan Terminacion registrada.
+
+Inspeccion Final registra:
+
+- Inspector activo.
+- Fecha y hora de inspeccion.
+- Resultado final: `Reencauchada` o `Reparada`.
+
+Una llanta marcada como `Reencauchada` queda con estado `REENCAUCHADA`.
+Una llanta marcada como `Reparada` queda con estado `REPARADA`; este caso aplica
+a llantas que ingresaron solamente para reparacion y pasan por Inspeccion
+Inicial, Reparacion, Vulcanizacion y Terminacion.
+
+Tanto las llantas `REENCAUCHADAS` como las `REPARADAS` salen hacia Terminacion.
+
+Cada ejecucion crea una fila en `procesos` con `id_subproceso = 9`. Si se repite
+la Inspeccion Final antes de Terminacion, se crea otra fila con `reproceso = 1`.
+
+### Rechazo durante inspeccion final
+
+- Usa los motivos de `resoluciones_i`, excepto PENDIENTE y APTA.
+- Cambia la llanta a `RECHAZADA`.
+- Registra una fila en `procesos` con `id_subproceso = 9`.
+
+### Deshacer inspeccion final
+
+Se permite deshacer la ultima Inspeccion Final siempre que la llanta no tenga
+Terminacion registrada. Al deshacer, se elimina la ultima fila de
+`id_subproceso = 9` y se restaura en `llantas` el resultado anterior. Si no hay
+una inspeccion final anterior, la llanta vuelve a estado `APTA`.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición

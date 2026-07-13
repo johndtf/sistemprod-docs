@@ -9,6 +9,8 @@ Valores principales:
 0 = Pendiente
 1 = Apta
 2 = Rechazada
+3 = Reparada
+4 = Reencauchada
 
 ---
 
@@ -124,6 +126,27 @@ Cada ejecucion crea una fila independiente en `procesos` con
 
 Para ingresar a Vulcanizado, la llanta debe conservar estado `APTA` y tener
 Embandado aprobado en `procesos`.
+
+### Estado actual de Inspeccion Final
+
+Inspeccion Final clasifica la llanta como `REPARADA` o `REENCAUCHADA`, o puede
+rechazarla. La ultima ejecucion queda resumida en `llantas` mediante:
+
+- `fecha_inspeccion_final`
+- `fecha_registro_inspeccion_final`
+- `id_operario_inspeccion_final`
+- `id_resolucion_inspeccion_final`
+
+El resultado positivo no requiere una columna adicional: se conserva en
+`llantas.id_estado` y en `procesos.id_estado_resultado` usando:
+
+- `3 = REPARADA`
+- `4 = REENCAUCHADA`
+
+Cada ejecucion crea una fila independiente en `procesos` con
+`id_subproceso = 9`. Si se deshace la ultima Inspeccion Final, se elimina esa
+fila historica y `llantas` vuelve a reflejar la inspeccion final anterior. Si no
+hay una anterior, la llanta vuelve a estado `APTA`.
 
 ### Parametros de planta
 
