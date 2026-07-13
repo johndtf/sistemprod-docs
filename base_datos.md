@@ -109,6 +109,22 @@ Para ingresar a Embandado, la llanta debe conservar estado `APTA`, tener Relleno
 aprobado y tener Corte de Banda registrado despues del ultimo Relleno. Si Corte
 fue deshecho, la llanta no queda disponible para Embandado.
 
+### Estado actual de Vulcanizado
+
+Vulcanizado no produce datos propios adicionales. La ultima ejecucion queda
+resumida en `llantas` mediante:
+
+- `fecha_vulcanizado`
+- `fecha_registro_vulcanizado`
+- `id_operario_vulcanizado`
+- `id_resolucion_vulcanizado`
+
+Cada ejecucion crea una fila independiente en `procesos` con
+`id_subproceso = 8`.
+
+Para ingresar a Vulcanizado, la llanta debe conservar estado `APTA` y tener
+Embandado aprobado en `procesos`.
+
 ### Parametros de planta
 
 La tabla `parametros_planta` guarda ajustes operativos configurables por planta.

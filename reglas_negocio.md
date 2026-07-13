@@ -308,6 +308,36 @@ operario y resolucion de Embandado.
 
 ---
 
+## Vulcanizado
+
+Solo pueden ingresar a Vulcanizado las llantas que:
+
+- Esten en estado `APTA`.
+- Tengan Embandado aprobado en `procesos`.
+
+Vulcanizado no tiene datos tecnicos propios ni control de tiempo previo. El
+formulario muestra informacion contextual de la llanta para confirmar que se
+esta registrando el tiquete correcto.
+
+Cada ejecucion aprobada:
+
+- Mantiene la llanta en estado `APTA`.
+- Registra `id_resolucion = 1` e `id_estado_resultado = 1`.
+- Crea una fila en `procesos` con `id_subproceso = 8`.
+- Actualiza en `llantas` la ultima fecha, fecha de registro, operario y
+  resolucion de Vulcanizado.
+
+Si el subproceso se repite, se crea otra fila en `procesos` con
+`reproceso = 1`.
+
+### Rechazo durante vulcanizado
+
+- Usa los motivos de `resoluciones_i`, excepto PENDIENTE y APTA.
+- Cambia la llanta a `RECHAZADA`.
+- Registra una fila en `procesos` con `id_subproceso = 8`.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición

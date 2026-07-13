@@ -11,10 +11,10 @@ Implementados:
 - Relleno.
 - Corte de Banda.
 - Embandado.
+- Vulcanización.
 
 Pendientes:
 
-- Implementar Vulcanización.
 - Implementar Inspección Final.
 - Implementar Terminación.
 
