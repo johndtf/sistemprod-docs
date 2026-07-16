@@ -17,9 +17,10 @@ Implementados:
 
 Pendientes:
 
-- Salidas de llantas reencauchadas y reparadas.
-- Costeo estimado de reencauchadas en salida usando `pesos_banda`.
+- Reportes imprimibles de salidas procesadas.
 - Recosteo mensual de reencauchadas con costo/kg real.
+- Formulario de traslados entre bodegas para actualizar `id_bodega_actual`
+  conservando la bodega registrada en la salida original.
 
 ---
 

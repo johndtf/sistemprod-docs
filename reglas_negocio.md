@@ -430,6 +430,66 @@ reparaciones usadas.
 
 ---
 
+# Salidas de Llantas Procesadas
+
+## Tipos de salida
+
+El formulario de salidas procesadas permite trabajar con:
+
+- llantas `REENCAUCHADAS`
+- llantas `REPARADAS`
+
+Las llantas `REENCAUCHADAS` se costean al salir. Las llantas `REPARADAS` no se
+costean por ahora.
+
+## Documento de salida
+
+El numero de documento se genera automaticamente al confirmar una o varias
+llantas con `Actualizar salida`. El consecutivo se guarda en
+`parametros_planta` con el codigo `documento_salida_procesadas_actual` dentro
+de la misma transaccion que actualiza las llantas. Por ello una salida fallida o
+abandonada no consume un numero de documento.
+
+## Salida individual y por bloque
+
+Una salida puede armarse de dos formas:
+
+- Individual: digitando el tiquete y buscando la llanta.
+- Por bloque: cargando todas las llantas que estan en ubicacion `P` y tienen el
+  estado seleccionado.
+
+La carga por bloque solo prepara la tabla visible. La base de datos cambia
+cuando el usuario confirma con `Actualizar salida`.
+
+Al confirmar una salida desde planta, la llanta pasa de ubicacion `P` a `B`.
+El documento conserva su bodega destino en `id_bodega_salida` y asigna la misma
+como `id_bodega_actual`. Los traslados futuros entre bodegas cambiaran solo la
+bodega actual, manteniendo el dato historico del documento.
+
+## Validaciones para reencauchadas
+
+Para una llanta `REENCAUCHADA`, la salida exige:
+
+- ubicacion `P`
+- estado `REENCAUCHADA`
+- combinacion dimension + diseno registrada en `pesos_banda`
+- costo/kg promedio configurado en `parametros_planta`, con dos decimales
+- fecha de Terminacion para definir mes y anio de proceso
+
+Si falta una combinacion de peso, el sistema informa el problema y la salida no
+se completa hasta crear el registro en el catalogo.
+
+## Validaciones para reparadas
+
+Para una llanta `REPARADA`, la salida exige:
+
+- ubicacion `P`
+- estado `REPARADA`
+
+No se calcula costo estimado en esta etapa.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición

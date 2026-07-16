@@ -165,8 +165,12 @@ estado con el que llega desde Inspeccion Final: `REPARADA` o `REENCAUCHADA`.
 ### Parametros de planta
 
 La tabla `parametros_planta` guarda ajustes operativos configurables por planta.
-El parametro `tiempo_secado_relleno_minutos` define los minutos orientativos de
-secado que se muestran en Relleno y Embandado.
+El parametro `tiempo_secado_relleno_minutos` corresponde al **secado del
+cemento** y define los minutos orientativos que se muestran en Relleno y
+Embandado.
+
+El parametro `costo_kg_promedio_reencauche` guarda el costo/kg provisional para
+costear salidas de llantas reencauchadas. Se maneja con dos decimales.
 
 ### Catalogo pesos_banda
 
@@ -180,6 +184,49 @@ dimension y diseno:
 
 La combinacion `id_dimension + id_banda` es unica. Este catalogo se usara para
 estimar el costo de las llantas `REENCAUCHADAS` al momento de la salida.
+
+### Catalogo bodegas
+
+La tabla `bodegas` contiene los destinos disponibles para salidas de llantas
+procesadas:
+
+- `id_bodega`
+- `codigo`
+- `nombre`
+- `activa`
+
+Una bodega inactiva no se ofrece como destino en salidas nuevas, pero se conserva
+para no perder la referencia historica de documentos anteriores.
+
+### Datos de salida y costeo en llantas
+
+Las salidas procesadas guardan en `llantas`:
+
+- `ubicacion`
+- `documento_salida`
+- `fecha_salida`
+- `id_empleado_salida`
+- `id_bodega_salida`
+- `id_bodega_actual`
+- `tipo_salida`
+
+Para llantas `REENCAUCHADAS` tambien se guarda el costeo estimado:
+
+- `peso_banda_costeo`
+- `costo_kg_estimado_aplicado`
+- `costo_estimado`
+- `mes_proceso`
+- `anio_proceso`
+
+El recosteo mensual posterior actualizara:
+
+- `costo_kg_real_aplicado`
+- `costo_real`
+
+`ubicacion` usa valores generales: `P` para planta, `B` para bodega y `C` para
+cliente. `id_bodega_salida` conserva la bodega seleccionada en el documento de
+salida desde planta; `id_bodega_actual` indica donde se encuentra la llanta en
+este momento y podra cambiar con futuros traslados entre bodegas.
 
 ---
 
