@@ -38,12 +38,12 @@ Registrar causas codificadas para análisis estadístico.
 
 ## Consultas
 
-### Modernizar consulta general de llantas
+### Consulta general de llantas con Tabulator
 
-Pendiente reemplazar la tabla manual de la consulta general por una rejilla de
-datos basada en **Tabulator**.
+Implementado el reemplazo de la tabla manual de la consulta general por una
+rejilla de datos basada en **Tabulator**.
 
-Objetivo:
+Incluye:
 
 - Reordenar columnas mediante arrastre.
 - Mostrar u ocultar columnas segun la necesidad de cada usuario.
@@ -52,8 +52,8 @@ Objetivo:
 - Conservar la configuracion elegida por el usuario entre sesiones.
 - Exportar a Excel solamente las columnas visibles, respetando su orden.
 
-La consulta y sus filtros actuales se conservan; Tabulator solo reemplazara la
-forma de presentar los resultados.
+La consulta y sus filtros actuales se conservan; Tabulator reemplaza solamente
+la forma de presentar los resultados.
 
 ### Separar consultas, reportes y dashboards
 
@@ -64,8 +64,8 @@ operacion diaria, documentos imprimibles y analisis:
 - **Reportes:** documentos de formato fijo para imprimir, firmar o entregar.
 - **Dashboards:** indicadores y graficas para supervision de produccion.
 
-Orden sugerido: modernizar la consulta general, crear el menu separado de
-reportes y, cuando exista suficiente informacion real, construir dashboards.
+Orden sugerido: crear el menu separado de reportes y, cuando exista suficiente
+informacion real, construir dashboards.
 
 Reporte:
 
