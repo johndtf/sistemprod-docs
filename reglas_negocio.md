@@ -8,6 +8,30 @@ Estado = PENDIENTE
 
 ---
 
+## Tipos de ingreso y compra de cascos
+
+El tipo de ingreso se selecciona por llanta al crearla dentro de una orden. Una
+misma orden puede contener llantas para reencauche, reparacion y venta de casco.
+
+Una llanta con `tipo_ingreso = VENTA_CASCO` puede comprarse desde que tenga una
+Inspeccion Inicial aprobada. No necesita esperar la Inspeccion Final.
+
+Cada documento de compra solo puede incluir llantas de un mismo vendedor. Al
+actualizar la compra, el sistema valida que las llantas sigan disponibles, crea
+la cabecera y sus detalles, incrementa el consecutivo y cambia el propietario
+actual al cliente configurado como empresa propietaria. Todo ocurre en una sola
+transaccion para evitar compras parciales o duplicadas.
+
+La empresa propietaria de la planta no puede figurar como vendedora en una
+compra de cascos. La regla se valida en el formulario y nuevamente en el
+servidor antes de crear el documento.
+
+La compra no cambia el cliente de la orden: esa relacion conserva quien entrego
+la llanta inicialmente. Tampoco se compra una llanta dos veces, porque el
+detalle de compra exige una llanta unica.
+
+---
+
 ## Inspección inicial
 
 Resultado posible:
@@ -490,6 +514,18 @@ No se calcula costo estimado en esta etapa.
 
 ---
 
+# Ordenes de Entrada
+
+Las llantas conservan un consecutivo manual dentro de la orden. Puede haber
+saltos para reflejar tachones o lineas anuladas del documento fisico.
+
+Una llanta puede modificar sus datos de entrada o cambiarse de orden solo antes
+de registrar Inspeccion Inicial. Desde ese subproceso se conserva la trazabilidad
+de dimension, diseno, cliente y orden. Una orden tampoco puede cambiar cliente,
+fecha o numero si alguna de sus llantas ya tiene Inspeccion Inicial.
+
+---
+
 # Nivel de Reencauche
 
 ## Definición
@@ -747,6 +783,24 @@ Eliminar una inspección inicial cuando existen procesos posteriores genera inco
 Por esta razón la reversión queda bloqueada cuando existen procesos posteriores asociados a la llanta.
 
 ---
+
+## Inspeccion final segun tipo de ingreso
+
+Al aprobar la inspeccion final, el resultado permitido depende del campo
+`llantas.tipo_ingreso`:
+
+- `REPARACION`: la llanta queda `REPARADA`.
+- `REENCAUCHE`: la llanta queda `REENCAUCHADA`.
+- `VENTA_CASCO`: la llanta queda `REENCAUCHADA`, porque el casco adquirido por
+  la empresa sigue el flujo de reencauche para convertirse en una llanta de
+  inventario propio.
+
+El formulario oculta el resultado incompatible para evitar errores de captura.
+El backend repite la validacion antes de guardar el proceso, por lo que la regla
+se conserva incluso fuera de la interfaz.
+
+Un rechazo durante inspeccion final sigue disponible para cualquier tipo de
+ingreso y cambia el estado de la llanta a `RECHAZADA`.
 
 ## Estados de empleados
 

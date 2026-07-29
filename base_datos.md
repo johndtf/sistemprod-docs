@@ -26,6 +26,41 @@ Campos importantes:
 
 Estado actual de la llanta.
 
+### Tipo de ingreso y propietario actual
+
+Cada llanta conserva su propio `tipo_ingreso`, incluso cuando comparte orden
+con otras llantas. Los valores actuales son:
+
+- `REENCAUCHE`: flujo normal de reencauche; Reparacion es opcional.
+- `REPARACION`: llanta ingresada para reparacion.
+- `VENTA_CASCO`: casco ofrecido por el cliente para que la planta pueda comprarlo.
+
+`id_propietario_actual` identifica al dueno real en ese momento. Al ingresar,
+se inicializa con el cliente de la orden. Si la planta compra un casco, la orden
+mantiene el cliente que lo entrego y solo cambia `id_propietario_actual` al
+cliente configurado como empresa propietaria.
+
+---
+
+## Tabla data
+
+`data` guarda la configuracion unica de identidad de la planta. El registro con
+`id_configuracion = 1` relaciona `id_cliente_propietario` con el cliente que
+representa a la empresa e incluye `eslogan` y, para uso posterior en reportes,
+`logo_ruta`. El archivo del logo no se almacena en la tabla; solo su ruta.
+
+---
+
+## Tablas compras_cascos y compras_cascos_detalle
+
+`compras_cascos` es la cabecera del comprobante y guarda el consecutivo
+`documento`, la fecha, el vendedor, la empresa compradora y el empleado que
+registro la compra.
+
+`compras_cascos_detalle` relaciona cada comprobante con sus llantas y su
+`valor_compra`. La llave unica de `id_llanta` impide que la misma llanta sea
+comprada dos veces.
+
 ### nivel_reencauche
 
 Número de reencauche actual.
