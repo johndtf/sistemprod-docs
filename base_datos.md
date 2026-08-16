@@ -159,8 +159,10 @@ resumida en `llantas` mediante:
 Cada ejecucion crea una fila independiente en `procesos` con
 `id_subproceso = 8`.
 
-Para ingresar a Vulcanizado, la llanta debe conservar estado `APTA` y tener
-Embandado aprobado en `procesos`.
+Para ingresar a Vulcanizado, la llanta debe conservar estado `APTA`. Las de
+tipo `REENCAUCHE` o `VENTA_CASCO` requieren Embandado aprobado; las de tipo
+`REPARACION` requieren Reparacion aprobada y pueden saltar directamente desde
+ese subproceso.
 
 ### Estado actual de Inspeccion Final
 
@@ -262,6 +264,28 @@ El recosteo mensual posterior actualizara:
 cliente. `id_bodega_salida` conserva la bodega seleccionada en el documento de
 salida desde planta; `id_bodega_actual` indica donde se encuentra la llanta en
 este momento y podra cambiar con futuros traslados entre bodegas.
+
+---
+
+## Tabla correcciones_llanta
+
+Bitacora de las correcciones autorizadas a los datos vigentes de una llanta
+despues de iniciar produccion. No reemplaza ni modifica el historial de
+`procesos`; registra exclusivamente la auditoria de la correccion.
+
+Campos:
+
+- `id_correccion`
+- `id_llanta`
+- `fecha_registro`
+- `id_empleado`
+- `motivo`
+- `datos_anteriores`
+- `datos_nuevos`
+
+Los dos campos de datos se almacenan como texto JSON. Esto permite conservar en
+una misma fila la marca, dimension, diseno, serie, prioridad, nivel de
+reencauche y observacion antes y despues de cada correccion.
 
 ---
 

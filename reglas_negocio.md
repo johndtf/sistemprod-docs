@@ -337,7 +337,14 @@ operario y resolucion de Embandado.
 Solo pueden ingresar a Vulcanizado las llantas que:
 
 - Esten en estado `APTA`.
-- Tengan Embandado aprobado en `procesos`.
+- Si su tipo de ingreso es `REENCAUCHE` o `VENTA_CASCO`, tengan Embandado
+  aprobado en `procesos`.
+- Si su tipo de ingreso es `REPARACION`, tengan Reparacion aprobada en
+  `procesos`; no requieren Relleno, Corte de Banda ni Embandado.
+
+Esto permite que una llanta recibida exclusivamente para reparar avance desde
+la aplicacion de sus parches hacia Vulcanizado, sin forzar subprocesos que no
+corresponden a su flujo.
 
 Vulcanizado no tiene datos tecnicos propios ni control de tiempo previo. El
 formulario muestra informacion contextual de la llanta para confirmar que se
@@ -801,6 +808,27 @@ se conserva incluso fuera de la interfaz.
 
 Un rechazo durante inspeccion final sigue disponible para cualquier tipo de
 ingreso y cambia el estado de la llanta a `RECHAZADA`.
+
+## Correccion de llantas en proceso
+
+Los datos de identificacion de una llanta pueden corregirse despues de iniciar
+produccion cuando se detecte un error de ingreso, por ejemplo una dimension o
+un diseno de banda equivocado. Esta operacion actualiza solamente el registro
+vigente de `llantas`; no modifica las filas historicas de `procesos` ni altera
+la orden original.
+
+La correccion permite actualizar marca, dimension, diseno, serie, prioridad,
+nivel de reencauche y observacion. El tipo de ingreso se conserva, porque
+define el flujo permitido y el resultado de Inspeccion Final.
+
+No se permite corregir cuando la llanta ya tiene costo estimado, costo real,
+documento o fecha de salida, o cuando ya no se encuentra en planta. Cada cambio
+exige un motivo y crea una fila en `correcciones_llanta` con empleado, fecha,
+valores anteriores y valores nuevos.
+
+Si se cambia dimension o diseno despues de Corte de Banda o de un subproceso
+posterior, el usuario debe confirmar que los valores corregidos coinciden con
+la llanta fisica.
 
 ## Estados de empleados
 
