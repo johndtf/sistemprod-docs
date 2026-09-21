@@ -209,6 +209,11 @@ Embandado.
 El parametro `costo_kg_promedio_reencauche` guarda el costo/kg provisional para
 costear salidas de llantas reencauchadas. Se maneja con dos decimales.
 
+El parametro `iva_predeterminado_ventas` conserva el porcentaje que se propone
+al cargar cada llanta en una factura de venta. El valor se puede modificar por
+llanta antes de confirmar la venta, por lo que el detalle historico conserva el
+IVA realmente aplicado a cada una.
+
 ### Catalogo pesos_banda
 
 La tabla `pesos_banda` guarda el peso promedio de banda por combinacion de

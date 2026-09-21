@@ -17,10 +17,23 @@ Implementados:
 
 Pendientes:
 
-- Reportes imprimibles de salidas procesadas.
+- Reportes de salida procesada: implementadas las copias de Planta, Bodega,
+  Facturacion completa y Facturacion simplificada.
 - Recosteo mensual de reencauchadas con costo/kg real.
 - Formulario de traslados entre bodegas para actualizar `id_bodega_actual`
   conservando la bodega registrada en la salida original.
+
+### Salidas de rechazadas
+
+Implementada la salida general de rechazadas de Planta a Bodega. Queda
+pendiente la entrega individual desde Bodega al cliente, dentro de Ventas.
+
+### Garantias
+
+Pendiente implementar el ingreso y la evaluacion de garantias despues de que
+la actualizacion de ventas permita identificar las llantas entregadas al
+cliente. Las garantias usaran una tabla propia de ajustes sin alterar el
+historial productivo actual de `llantas`.
 
 ---
 

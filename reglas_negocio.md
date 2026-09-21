@@ -521,6 +521,95 @@ No se calcula costo estimado en esta etapa.
 
 ---
 
+# Actualizacion de Ventas
+
+La actualizacion de ventas registra en Sistemprod una factura que fue emitida
+previamente por el programa contable. Un documento corresponde a un solo
+cliente comprador y a una sola bodega de origen, pero puede incluir varias
+llantas procesadas.
+
+Solo se pueden facturar llantas con ubicacion `B` y estado `REENCAUCHADA` o
+`REPARADA`. Al confirmar, todas las llantas seleccionadas pasan a ubicacion
+`C`, `id_bodega_actual` se establece en `NULL` y se conserva la bodega de la
+salida original de produccion. El propietario actual no cambia: el comprador
+de la factura se almacena por separado en el documento de venta.
+
+La cabecera conserva numero de factura, fecha, comprador, empleado, bodega y
+observacion. El detalle conserva precio de venta e IVA por llanta. El numero de
+factura lo digita el usuario y es unico, porque proviene de contabilidad.
+
+El parametro `iva_predeterminado_ventas` propone un IVA inicial al agregar una
+llanta a la factura. Cada fila permite modificarlo antes de confirmar; por eso
+el valor definitivo queda almacenado individualmente en el detalle de venta.
+
+El comprobante de venta se genera desde las tablas de ventas, no desde el
+estado actual de las llantas. Por ello continua mostrando la evidencia de la
+entrega aun si una llanta vuelve posteriormente a planta por garantia.
+
+---
+
+# Salidas de Llantas Rechazadas
+
+Las llantas rechazadas salen inicialmente de Planta hacia una Bodega. Las
+entregas posteriores a cada cliente se manejaran desde el modulo de Ventas.
+
+Una salida rechazada exige estado `RECHAZADA` y ubicacion `P`. Al confirmar un
+documento, una o varias llantas pasan a ubicacion `B` y se guardan bodega,
+fecha, empleado y tipo de salida `RECHAZADA`.
+
+El consecutivo usa `documento_salida_rechazadas_actual` en
+`parametros_planta`, independiente de las salidas procesadas. La tabla muestra
+tiquete, orden-consecutivo, dimension, propietario y causa de rechazo; esta se
+toma del ultimo proceso que registro resultado rechazado.
+
+Las copias de Planta y Bodega son iguales y no incluyen costos: solo cambia la
+etiqueta de la copia. Se imprimen en hoja carta horizontal con firmas de Planta
+y Bodega.
+
+## Reporte de Planta
+
+Los reportes **Planta** y **Bodega** comparten el mismo formato operativo de un
+documento de salida ya confirmado. Se usan para verificar las llantas fisicas
+durante la entrega a bodega y no incluyen costos; solo cambia la etiqueta de
+la copia impresa.
+
+El reporte se disena para una hoja tamano carta en orientacion horizontal.
+Muestra empresa, numero y fecha del documento, bodega destino, tipo de salida,
+empleado que registro la entrega y el detalle de tiquete, orden-consecutivo,
+dimension, diseno, marca, fecha de proceso y propietario actual. Al final deja
+espacio para las firmas de quien entrega por Planta y quien recibe por Bodega.
+
+La vista previa y la impresion consultan el documento por su numero. Si una
+llanta se traslada posteriormente a otra bodega, el reporte conserva la bodega
+original almacenada en `id_bodega_salida`.
+
+## Reporte de Facturacion Completa
+
+El reporte **Facturacion completa** usa hoja carta horizontal. Muestra tiquete,
+orden-consecutivo, dimension, diseno, fecha de proceso, propietario, costo de
+reencauche y costo del casco; no muestra marca.
+
+El costo de reencauche corresponde a `costo_real` si ya se realizo recosteo
+mensual y, de lo contrario, a `costo_estimado`. El costo del casco se toma del
+valor de compra registrado para la llanta y es cero si no existe compra.
+
+Al pie de las columnas de costo se imprimen los totales de costo de reencauche
+y costo de cascos correspondientes a todas las llantas del documento.
+
+Las llantas cuyo propietario actual es la empresa configurada se imprimen
+primero. Despues se incluyen las llantas de otros propietarios; dentro de ambos
+grupos se ordenan por dimension y diseno.
+
+## Reporte de Facturacion Simplificada
+
+El reporte **Facturacion simplificada** usa hoja carta horizontal y resume el
+documento en dos secciones: llantas de la empresa propietaria y llantas de
+servicio. Cada seccion agrupa las llantas por dimension y diseno, mostrando
+cantidad, costo de reencauche y costo de casco. Al final de cada seccion se
+imprimen sus totales de cantidad y costos.
+
+---
+
 # Ordenes de Entrada
 
 Las llantas conservan un consecutivo manual dentro de la orden. Puede haber
