@@ -270,6 +270,20 @@ cliente. `id_bodega_salida` conserva la bodega seleccionada en el documento de
 salida desde planta; `id_bodega_actual` indica donde se encuentra la llanta en
 este momento y podra cambiar con futuros traslados entre bodegas.
 
+### Entregas de rechazos
+
+Las tablas `entregas_rechazadas` y `entregas_rechazadas_detalle` registran el
+movimiento posterior desde Bodega hacia Cliente. La cabecera guarda documento
+consecutivo, fecha, bodega origen, cliente receptor, empleado y observacion.
+El detalle conserva una fotografia de tiquete, orden, dimension, propietario y
+causa de rechazo para que el comprobante historico no dependa de los valores
+vigentes de `llantas`.
+
+Al confirmar una entrega, la llanta permanece con estado `RECHAZADA`, cambia
+de ubicacion `B` a `C` y `id_bodega_actual` queda en `NULL`. Una llanta puede
+tener varias entregas historicas si despues regresa a planta y completa otro
+ciclo operativo.
+
 ---
 
 ## Tabla correcciones_llanta

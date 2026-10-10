@@ -579,6 +579,23 @@ empleado que registro la entrega y el detalle de tiquete, orden-consecutivo,
 dimension, diseno, marca, fecha de proceso y propietario actual. Al final deja
 espacio para las firmas de quien entrega por Planta y quien recibe por Bodega.
 
+## Entrega de Rechazos
+
+La **Entrega de rechazos** es un flujo distinto a la salida anterior: traslada
+llantas con estado `RECHAZADA` desde una Bodega hacia su cliente receptor. Solo
+puede incluir llantas con ubicacion `B`, de una misma bodega y cuyo propietario
+actual sea el cliente elegido en el documento.
+
+El sistema genera un consecutivo independiente mediante el parametro
+`documento_entrega_rechazadas_actual`. La cabecera guarda fecha, bodega de
+origen, cliente, empleado y observacion; el detalle conserva tiquete, orden,
+dimension, propietario y causa de rechazo como fotografia del momento de la
+entrega. Al confirmarla, cada llanta pasa a ubicacion `C` e
+`id_bodega_actual` queda en `NULL`, sin cambiar su estado `RECHAZADA`.
+
+El comprobante se imprime en copias de **Cliente** y **Bodega**. Ambas tienen
+el mismo detalle y solo cambia el destino de la copia y la firma receptora.
+
 La vista previa y la impresion consultan el documento por su numero. Si una
 llanta se traslada posteriormente a otra bodega, el reporte conserva la bodega
 original almacenada en `id_bodega_salida`.

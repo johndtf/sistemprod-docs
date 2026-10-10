@@ -25,8 +25,8 @@ Pendientes:
 
 ### Salidas de rechazadas
 
-Implementada la salida general de rechazadas de Planta a Bodega. Queda
-pendiente la entrega individual desde Bodega al cliente, dentro de Ventas.
+Implementadas la salida general de rechazadas de Planta a Bodega y la entrega
+posterior desde Bodega al cliente, dentro de Ventas.
 
 ### Garantias
 
