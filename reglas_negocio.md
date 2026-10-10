@@ -30,6 +30,17 @@ La compra no cambia el cliente de la orden: esa relacion conserva quien entrego
 la llanta inicialmente. Tampoco se compra una llanta dos veces, porque el
 detalle de compra exige una llanta unica.
 
+Tambien existe la **Compra de llantas en bodega**. Solo admite llantas con
+estado `REENCAUCHADA`, ubicacion `B` e `id_bodega_actual` correspondiente a la
+bodega elegida. No admite llantas `REPARADA`. Esta compra conserva el
+`tipo_ingreso`, el estado y la ubicacion de la llanta; solo cambia su
+propietario actual a la empresa propietaria.
+
+La cabecera de este segundo flujo se guarda en las mismas tablas de compra,
+con `origen_compra = BODEGA` e `id_bodega`. Un documento solo puede incluir
+una bodega y un vendedor. El comprobante muestra dicho origen y se imprime en
+una copia para el vendedor y otra para la empresa.
+
 ---
 
 ## Inspección inicial

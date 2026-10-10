@@ -55,7 +55,9 @@ representa a la empresa e incluye `eslogan` y, para uso posterior en reportes,
 
 `compras_cascos` es la cabecera del comprobante y guarda el consecutivo
 `documento`, la fecha, el vendedor, la empresa compradora y el empleado que
-registro la compra.
+registro la compra. `origen_compra` distingue si fue una compra inicial en
+`PLANTA` o una compra posterior desde `BODEGA`; para esta ultima se conserva
+tambien `id_bodega`, que indica desde cual bodega se compro la llanta.
 
 `compras_cascos_detalle` relaciona cada comprobante con sus llantas y su
 `valor_compra`. La llave unica de `id_llanta` impide que la misma llanta sea
